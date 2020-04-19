@@ -11,10 +11,8 @@ export class AppComponent implements OnInit{
   //Horas
   horas: Hora[];
   horaPost: any = {};
-  idhorainput: number;
-  horaInicio: string;
-  horaFin: string;
-
+  it: string;
+  ft: string;
   //Salones
 
 
@@ -28,9 +26,6 @@ export class AppComponent implements OnInit{
   constructor(private horaService: HoraService) {}
 
   ngOnInit() {
-    this.horaPost = {};
-    this.horaPost.id = this.idhorainput;
-    this.horaPost.time = [this.horaInicio, this.horaFin];
     this.loadHoras();
   }
 
@@ -43,11 +38,20 @@ export class AppComponent implements OnInit{
   }
 
   crearHora() {
+    console.log(this.horaPost);
+    console.log(this.it);
+    console.log(this.ft);
+
+    this.horaPost.time = [this.it, this.ft];
+
+    console.log(this.horaPost);
+
     this.horaService.createHoras(this.horaPost).subscribe(next => {
       console.log('todokul');
     }, error => {
-      console.log('error')
+      console.log('error');
     });
   }
+
 
 }

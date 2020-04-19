@@ -1,4 +1,6 @@
 export interface Hora {
   id: number;
-  time: Array<string>;
+  // time: ['', ''];
+  it: string;
+  ft: string;
 }

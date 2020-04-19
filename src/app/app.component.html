@@ -10,10 +10,10 @@
               <th scope="col">Last</th>
             </tr>
           </thead>
-          <tbody *ngFor="let hora of horas">
+          <tbody *ngFor="let h of horas">
             <tr>
-              <td>{{hora.id}}</td>
-              <td>{{hora.time}}</td>
+              <td>{{h.id}}</td>
+              <td>{{h.time}}</td>
             </tr>
           </tbody>
         </table>
@@ -22,19 +22,14 @@
 
     <div class="col-6">
       <div>
-        <form #horaForm="ngForm" (ngSubmit)="crearHora()">
-          <div>ID:</div>
-          <input class="form-control" name="idhorainput" type="text"
-          placeholder="Idhorainput" required [(ngModel)]="idhorainput">
-          <div>Inserte intervalo de horas</div>
-          <div class="row">
-            <input class="col form-control" type="text" name="horaInicioinput"
-            placeholder="HoraInicioinput" required [(ngModel)]="horaInicio">
-            :
-            <input class="col form-control" type="text" name="horaFininput"
-            placeholder="HoraIFininput" required [(ngModel)]="horaFin">
-          </div>
-          <button class="btn btn-outline-success" type="submit">Añadir</button>
+        <form #createForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="crearHora()">
+          <input class="form-control mr-sm-2" type="text" name="horaID"
+                placeholder="id de la hora" required [(ngModel)]="horaPost.id">
+          <input class="form-control mr-sm-2" type="text" name="password"
+                placeholder="tiempo de inicio " required [(ngModel)]="it">
+                <input class="form-control mr-sm-2" type="text" name="password2"
+                placeholder="tiempo de fin " required [(ngModel)]="ft">
+          <button [disabled]="!createForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Hora</button>
         </form>
       </div>
     </div>
