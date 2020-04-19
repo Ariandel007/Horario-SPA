@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Horario-SPA"
+    }
+  },
+  "defaultProject": "Horario-SPA",
+  "cli": {
+    "analytics": false
+  }
 }
