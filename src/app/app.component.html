@@ -165,10 +165,29 @@
    </div>
 <!-- -----------------------horarios-------------------------------------------- -->
 
-<div *ngIf="getSelectNav() == 4" class="row">
-  <div class="col-12">
+<div *ngIf="getSelectNav() == 4">
+  <button type="button" class="btn btn-dark center"(click)="loadCalculoMejorHorario()">Calcular</button>
+
+  <div>
       <div class="row">
-        <button (click)="loadCalculoMejorHorario()">Calcular</button>
+        <div *ngFor="let item of mejorHorario">
+          <figure class="tarjetaEstilo">
+            <figcaption>
+              <h3>ID de Curso: {{item.C.id}}</h3>
+              <div>Instructores del Curso:</div>
+              <div>{{item.C.instructors[0].nombre}}</div>
+              <div>{{item.C.instructors[1].nombre}}</div>
+              <div>Instructor elegido: {{item.I.nombre}}</div>
+              <div>Hora del curso:</div>
+              <div>[{{item.MT.time}}]</div>
+              <div>Salon:</div>
+              <div>ID del salon: {{item.R.id}}</div>
+              <div>Capacidad del salon: {{item.R.id}}</div>
+            </figcaption>
+          </figure>
+
+        </div>
+
       </div>
     </div>
    </div>
