@@ -1,18 +1,19 @@
 
- <div>
+ <div class="">
    <div class="row">
     <div class="col-12">
-      <nav class="navbar navbar-expand-md navbar-dark bg-primary" >
-        <button type="button" class="btn btn-secondary">Horas</button>
-        <button type="button" class="btn btn-success">Salones</button>
-        <button type="button" class="btn btn-danger">Cursos</button>
-        <button type="button" class="btn btn-warning">Calcular Horarios</button>
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary " >
+        <button type="button" class="btn btn-secondary " (click)="setSelectNav(1)">Horas</button>
+        <button type="button" class="btn btn-success" (click)="setSelectNav(2)">Salones</button>
+        <button type="button" class="btn btn-danger" (click)="setSelectNav(3)">Cursos</button>
+        <button type="button" class="btn btn-warning" (click)="setSelectNav(4)">Calcular Horarios</button>
       </nav>
     </div>
    </div>
-
-<!-- -----------------------horas---------------------------------------------- -->
-   <div class="row">
+   <br>
+   <br>
+   <!-- -----------------------horas---------------------------------------------- -->
+   <div *ngIf="getSelectNav() == 1" class="row">
     <div class="col-12">
 
       <div class="container">
@@ -29,7 +30,7 @@
                 <tbody *ngFor="let h of horas">
                   <tr>
                     <td>{{h.id}}</td>
-                    <td>{{h.time}}</td>
+                    <td>[{{h.time}}]</td>
                   </tr>
                 </tbody>
               </table>
@@ -41,9 +42,9 @@
               <form #createForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="crearHora()">
                 <input class="form-control mr-sm-2" type="text" name="horaID"
                       placeholder="id de la hora" required [(ngModel)]="horaPost.id">
-                <input class="form-control mr-sm-2" type="text" name="password"
+                <input class="form-control mr-sm-2" type="text" name="inicioTiempo"
                       placeholder="tiempo de inicio " required [(ngModel)]="it">
-                      <input class="form-control mr-sm-2" type="text" name="password2"
+                      <input class="form-control mr-sm-2" type="text" name="finalTiempo"
                       placeholder="tiempo de fin " required [(ngModel)]="ft">
                 <button [disabled]="!createForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Hora</button>
               </form>
@@ -57,8 +58,8 @@
 
 <!-- -----------------------salones--------------------------------------------- -->
 
-   <div class="row">
-    <div class="col-12">
+<div *ngIf="getSelectNav() == 2" class="row">
+  <div class="col-12">
       <div class="row">
 
         <div class="col-6">
@@ -81,11 +82,11 @@
         </div>
 
         <div class="col-6">
-          <div>
+          <div class="margin-text">
             <form #createSalonForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="crearSalon()">
-              <input class="form-control mr-sm-2" type="text" name="horaID"
+              <input class="form-control mr-sm-2" type="text" name="idSalon"
                     placeholder="id del salon" required [(ngModel)]="salonPost.id">
-              <input class="form-control mr-sm-2" type="text" name="password"
+              <input class="form-control mr-sm-2" type="text" name="capSalon"
                     placeholder="capacidad del salon" required [(ngModel)]="salonPost.cap">
               <button [disabled]="!createSalonForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Salon</button>
             </form>
@@ -98,19 +99,76 @@
    </div>
 <!-- -----------------------cursos-------------------------------------------- -->
 
-   <div class="row">
-    <div class="col-12">
+<div *ngIf="getSelectNav() == 3" class="row">
+  <div class="col-12">
       <div class="row">
-        INSERTAR CURSOS
+
+        <div class="col-6">
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID Cursos</th>
+                  <th scope="col">Capacidad Cursos</th>
+                  <th scope="col">ID de Instructor 1</th>
+                  <th scope="col">Nombre de Instructor 1</th>
+                  <th scope="col">ID de Instructor 2</th>
+                  <th scope="col">Nombre de Instructor 2</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let c of cursos">
+                <tr>
+                  <td>{{c.id}}</td>
+                  <td>{{c.cap}}</td>
+                  <td>{{c.instructors[0].id}}</td>
+                  <td>{{c.instructors[0].nombre}}</td>
+                  <td>{{c.instructors[1].id}}</td>
+                  <td>{{c.instructors[1].nombre}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div>
+            <form #createCursoForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="crearCurso()">
+              <input class="form-control mr-sm-2" type="text" name="idCurso"
+                    placeholder="ID del curso" required [(ngModel)]="cursoPost.id">
+
+                <input class="form-control mr-sm-2" type="text" name="capCurso"
+                    placeholder="Capacidad del curso" required [(ngModel)]="cursoPost.cap">
+
+              <input class="form-control mr-sm-2" type="text" name="inst1ID"
+                    placeholder="ID del primer instructor" required [(ngModel)]="inst1.id">
+
+
+              <input class="form-control mr-sm-2" type="text" name="inst1Nombre"
+                    placeholder="Nombre del primer instructor" required [(ngModel)]="inst1.nombre">
+
+
+              <input class="form-control mr-sm-2" type="text" name="inst2ID"
+                    placeholder="ID del segundo instructor" required [(ngModel)]="inst2.id">
+
+
+              <input class="form-control mr-sm-2" type="text" name="inst2Nombre"
+                    placeholder="Nombre del segundo instructor" required [(ngModel)]="inst2.nombre">
+
+
+              <button [disabled]="!createCursoForm.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Salon</button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
    </div>
 <!-- -----------------------horarios-------------------------------------------- -->
 
-   <div class="row">
-    <div class="col-12">
+<div *ngIf="getSelectNav() == 4" class="row">
+  <div class="col-12">
       <div class="row">
-        CALCULAR HORARIOS
+        <button (click)="loadCalculoMejorHorario()">Calcular</button>
       </div>
     </div>
    </div>
